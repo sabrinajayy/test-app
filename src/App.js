@@ -3,7 +3,7 @@ import { Grid, Jumbotron } from 'react-bootstrap';
 
 class App extends Component {
 
-  state {
+  state = {
     guests: [
       {
         name: "Sabrina",
@@ -17,7 +17,7 @@ class App extends Component {
 
   }
 
-  getTotalInvited = () => return this.state.guests.length;
+  getTotalInvited = () => this.state.guests.length;
   //getAttendingGuests = () => ();
   //getUnConfirmedGuests = () => ();
 
