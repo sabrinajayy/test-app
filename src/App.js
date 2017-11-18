@@ -1,13 +1,75 @@
 import React, { Component } from 'react';
-import { Grid, Jumbotron } from 'react-bootstrap';
+import GuestList from './GuestList';
 
 class App extends Component {
+
+  state = {
+    isFiltered: false,
+    guests: [
+      {
+        name: "Sabrina",
+        isConfirmed: false,
+        isEditing: false
+      },
+      {
+        name: "Jonathan",
+        isConfirmed: true,
+        isEditing: false
+      },
+      {
+        name: "Junior",
+        isConfirmed: false,
+        isEditing: true
+      }
+    ],
+
+  }
+
+  toggleGuestPropertyAt = (property, indexToChange) =>
+    this.setState({
+      guests: this.state.guests.map((guest, index) => {
+        if (index == indexToChange) {
+          return{
+            ...guest,
+            [property]: !guest[property]
+          }
+        }
+        return guest;
+      })
+    });
+
+  toggleConfirmationAt = index =>
+    this.toggleGuestPropertyAt("isConfirmed", index);
+
+  toggleEditingAt = index =>
+    this.toggleGuestPropertyAt("isEditing", index);
+
+  setNameAt = (name, indexToChange) =>
+    this.setState({
+      guests: this.state.guests.map((guest, index) => {
+        if (index == indexToChange) {
+          return{
+            ...guest,
+            name
+          }
+        }
+        return guest;
+      })
+    });
+
+  toggleFilter = () =>
+    this.setState({ isFiltered: !this.state.isFiltered });
+
+  getTotalInvited = () => this.state.guests.length;
+  //getAttendingGuests = () => ();
+  //getUnConfirmedGuests = () => ();
+
   render() {
     return (
             <div className="App">
             <header>
               <h1>RSVP</h1>
-              <p>A Treehouse App</p>
+              <p>An app my Sabrina John</p>
               <form>
                   <input type="text" value="Safia" placeholder="Invite Someone" />
                   <button type="submit" name="submit" value="submit">Submit</button>
@@ -17,7 +79,11 @@ class App extends Component {
               <div>
                 <h2>Invitees</h2>
                 <label>
-                  <input type="checkbox" /> Hide those who haven't responded
+                  <input
+                    onChange={this.toggleFilter}
+                    type="checkbox"
+                    checked={this.state.isFiltered} />
+                  Hide those who haven't responded
                 </label>
               </div>
               <table className="counter">
@@ -36,32 +102,12 @@ class App extends Component {
                   </tr>
                 </tbody>
               </table>
-              <ul>
-                <li className="pending"><span>Safia</span></li>
-                <li className="responded"><span>Iver</span>
-                  <label>
-                    <input type="checkbox" checked /> Confirmed
-                  </label>
-                  <button>edit</button>
-                  <button>remove</button>
-                </li>
-                <li className="responded">
-                  <span>Corrina</span>
-                  <label>
-                    <input type="checkbox" checked /> Confirmed
-                  </label>
-                  <button>edit</button>
-                  <button>remove</button>
-                </li>
-                <li>
-                  <span>Joel</span>
-                  <label>
-                    <input type="checkbox" /> Confirmed
-                  </label>
-                  <button>edit</button>
-                  <button>remove</button>
-                </li>
-              </ul>
+              <GuestList
+                guests={this.state.guests}
+                toggleConfirmationAt={this.toggleConfirmationAt}
+                toggleEditingAt={this.toggleEditingAt}
+                setNameAt={this.setNameAt}
+                isFiltered={this.state.isFiltered} />
             </div>
           </div>
     );
