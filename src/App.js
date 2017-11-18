@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Jumbotron } from 'react-bootstrap';
-import SearchForm from './components/SearchForm';
-import Results from './components/Results';
 
 class App extends Component {
   render() {
