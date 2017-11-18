@@ -2,12 +2,31 @@ import React, { Component } from 'react';
 import { Grid, Jumbotron } from 'react-bootstrap';
 
 class App extends Component {
+
+  state {
+    guests: [
+      {
+        name: "Sabrina",
+        isConfirmed: false
+      },
+      {
+        name: "Jonathan",
+        isConfirmed: true
+      }
+    ],
+
+  }
+
+  getTotalInvited = () => return this.state.guests.length;
+  //getAttendingGuests = () => ();
+  //getUnConfirmedGuests = () => ();
+
   render() {
     return (
             <div className="App">
             <header>
               <h1>RSVP</h1>
-              <p>A Treehouse App</p>
+              <p>An app my Sabrina John</p>
               <form>
                   <input type="text" value="Safia" placeholder="Invite Someone" />
                   <button type="submit" name="submit" value="submit">Submit</button>
