@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Guest from './Guest';
 import PendingGuest from './PendingGuest';
+import GuestInputForm from'./GuestInputForm';
 
 const GuestList = props =>
   <ul>
@@ -28,7 +29,7 @@ GuestList.propTypes = {
   setNameAt: PropTypes.func.isRequired,
   isFiltered: PropTypes.bool.isRequired,
   removeGuestAt: PropTypes.func.isRequired,
-  pendingGuest: PropTypes.string.isRequired
+  pendingGuest: PropTypes.string
 }
 
 export default GuestList;
