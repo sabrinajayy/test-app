@@ -8,16 +8,16 @@ const GuestList = props =>
     <PendingGuest name={props.pendingGuest} />
     {props.guests
       .filter(guest => !props.isFiltered || guest.isConfirmed)
-      .map((guest, index) =>
+      .map((guest) =>
       <Guest
-        key={index}
+        key={guest.id}
         name={guest.name}
         isConfirmed={guest.isConfirmed}
         isEditing={guest.isEditing}
-        handleConfirmation={() => props.toggleConfirmationAt(index)}
-        handleEditing={() => props.toggleEditingAt(index)}
-        setName={text => props.setNameAt(text, index)}
-        handleRemove={() => props.removeGuestAt(index)} />
+        handleConfirmation={() => props.toggleConfirmationAt(guest.id)}
+        handleEditing={() => props.toggleEditingAt(guest.id)}
+        setName={text => props.setNameAt(text, guest.id)}
+        handleRemove={() => props.removeGuestAt(guest.id)} />
     )}
   </ul>;
 
@@ -28,7 +28,7 @@ GuestList.propTypes = {
   setNameAt: PropTypes.func.isRequired,
   isFiltered: PropTypes.bool.isRequired,
   removeGuestAt: PropTypes.func.isRequired,
-  pendingGuest: PropTypes.string.isRequired
+  pendingGuest: PropTypes.string
 }
 
 export default GuestList;
